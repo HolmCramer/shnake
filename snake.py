@@ -26,10 +26,11 @@ class Snake(Turtle):
     
     def init_segments(self, count=1) -> None:
         for _ in range(count):
-            self.segments.append(Segment())
+            self.segments.append(Segment(shape="square"))
         return
     
     def add_segment(self, segment : Segment) -> bool:
+        segment.shape("square")
         self.segments.insert(0, segment)
         return True
     

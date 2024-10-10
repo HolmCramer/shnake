@@ -4,7 +4,7 @@ from utils import SCREEN_COORDS, SNAKE_COLOR
 
 
 class Segment(Turtle):
-    def __init__(self, shape: str = "square", undobuffersize: int = 1000, visible: bool = True, food_spawn : bool = False, snake_positions : tuple = None) -> None:
+    def __init__(self, shape: str = "circle", undobuffersize: int = 1000, visible: bool = True, food_spawn : bool = False, snake_positions : tuple = None) -> None:
         super().__init__(shape, undobuffersize, visible)
         self.up()
         self.shapesize(0.8,0.8)
