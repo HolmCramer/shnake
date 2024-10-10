@@ -95,6 +95,7 @@ def main() -> None:
     #print(SCOREBOARD_POS)
     food = Segment(food_spawn=True, snake_positions=snake.get_snake_positions())
     
+    scoreboard.get_score_string()
     game_is_on = True
     eat_flag = False
     while game_is_on:

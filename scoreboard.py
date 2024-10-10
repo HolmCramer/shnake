@@ -10,14 +10,16 @@ class Scoreboard(Turtle):
         self.score : int = 0
         self.draw_scoreboard()
     
+    def get_score_string(self) -> str:
+        score_str = f"{(4-len(str(self.score)))*"0"}{str(self.score)}"
+        return score_str
+
     def draw_scoreboard(self) -> None:
         self.teleport(SCOREBOARD_POS[0],SCOREBOARD_POS[1])
-        self.write("0000", font=("Arial", 16, "normal"))
-
-    def draw_updated_score(self) -> None:
-        pass
-        #self.write(score, font=("Arial", 16, "normal"))
+        score_string = self.get_score_string()
+        self.write(score_string, font=("Arial", 16, "normal"))
 
     def increment_score(self) -> None:
         self.score += 10
-        self.draw_updated_score()
+        self.clear()
+        self.draw_scoreboard()
