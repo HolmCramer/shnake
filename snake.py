@@ -66,25 +66,30 @@ class Snake(Turtle):
                     self.setheading(WEST)
                     return
 
-    def get_direction(self, input_buffer : list) -> DIRECTIONS:
+    def get_direction(self, input_buffer : list, eaten : bool) -> DIRECTIONS:
+        if eaten is True:
+            segment = self.segments[1]
+        else:
+            segment = self.segments[0]
+        
         match input_buffer[0]:
             case DIRECTIONS.UP:
-                if self.segments[0].ycor() == self.ycor() + STEP_DIST:
+                if segment.ycor() == self.ycor() + STEP_DIST:
                     return input_buffer[1]
                 else:
                     return input_buffer[0]
             case DIRECTIONS.RIGHT:
-                if self.segments[0].xcor() == self.xcor() + STEP_DIST:
+                if segment.xcor() == self.xcor() + STEP_DIST:
                     return input_buffer[1]
                 else:
                     return input_buffer[0]
             case DIRECTIONS.DOWN:
-                if self.segments[0].ycor() == self.ycor() - STEP_DIST:
+                if segment.ycor() == self.ycor() - STEP_DIST:
                     return input_buffer[1]
                 else:
                     return input_buffer[0]
             case DIRECTIONS.LEFT:
-                if self.segments[0].xcor() == self.xcor() - STEP_DIST:
+                if segment.xcor() == self.xcor() - STEP_DIST:
                     return input_buffer[1]
                 else:
                     return input_buffer[0]
@@ -104,7 +109,7 @@ class Snake(Turtle):
 
 
     def move_snake(self, eaten : bool, input_buffer : list) -> bool:
-        direction = self.get_direction(input_buffer)
+        direction = self.get_direction(input_buffer, eaten)
         if eaten is False:
             self.move_to_snake_head()
         else:
