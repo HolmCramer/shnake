@@ -58,7 +58,7 @@ def event_handler() -> None:
 def self_collision_check() -> bool:
     flag = True
     for i in range(3, len(snake.segments)):
-        if snake.distance(snake.segments[i].pos()) < 10:
+        if snake.segments[i].pos() == snake.pos():
             flag = False
     return flag
 
