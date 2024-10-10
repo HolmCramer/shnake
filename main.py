@@ -1,8 +1,7 @@
 from turtle import Screen
-from snake import Snake, DIRECTIONS
+from snake import Snake, Segment, DIRECTIONS
 from scoreboard import Scoreboard, SCOREBOARD_POS
 import time
-from food import Segment
 from utils import SCREEN_RES, SCREEN_COORDS
 
 

@@ -2,13 +2,30 @@ from turtle import Turtle
 from enum import Enum
 from utils import SNAKE_COLOR, STEP_DIST, NORTH, EAST, SOUTH, WEST, SCREEN_COORDS
 from random import randint
-from food import Segment
 
 class DIRECTIONS(Enum):
     UP = 1
     RIGHT = 2
     DOWN = 3
     LEFT = 4
+
+class Segment(Turtle):
+    def __init__(self, shape: str = "circle", undobuffersize: int = 1000, visible: bool = True, food_spawn : bool = False, snake_positions : tuple = None) -> None:
+        super().__init__(shape, undobuffersize, visible)
+        self.up()
+        self.shapesize(0.8,0.8)
+        self.color(SNAKE_COLOR)
+        if food_spawn is True:
+            self.set_rnd_pos(snake_positions)
+    
+    def set_rnd_pos(self, snake_positions) -> None:
+        while True:
+            x = randint(SCREEN_COORDS[0][0]//20, SCREEN_COORDS[0][1]//20) * 20
+            y = randint(SCREEN_COORDS[1][0]//20, SCREEN_COORDS[1][1]//20) * 20
+            coords = (x,y)
+            if coords not in snake_positions:
+                break
+        self.setpos(coords)
 
 class Snake(Turtle):
     def __init__(self, shape: str = "square", undobuffersize: int = 1000, visible: bool = True) -> None:
