@@ -1,8 +1,8 @@
-from turtle import Screen
+from turtle import Screen, Turtle
 from snake import Snake, Segment, DIRECTIONS
 from scoreboard import Scoreboard, SCOREBOARD_POS
 import time
-from utils import SCREEN_RES, SCREEN_COORDS
+from utils import SCREEN_RES, SCREEN_COORDS, BORDER_OFFSET, STEP_DIST
 
 
 
@@ -15,6 +15,16 @@ screen.colormode(255)
 screen.bgcolor(139,172,15)
 screen.title("Snake")
 screen.tracer(0)
+
+def draw_border() -> None:
+    pen = Turtle(visible=False)
+    pen.teleport(SCREEN_COORDS[0][0] + BORDER_OFFSET, SCREEN_COORDS[1][1] - BORDER_OFFSET)
+    pen.goto(SCREEN_COORDS[0][1] - BORDER_OFFSET, SCREEN_COORDS[1][1] - BORDER_OFFSET)
+    pen.goto(SCREEN_COORDS[0][1] - BORDER_OFFSET, SCREEN_COORDS[1][0] + BORDER_OFFSET)
+    pen.goto(SCREEN_COORDS[0][0] + BORDER_OFFSET, SCREEN_COORDS[1][0] + BORDER_OFFSET)
+    pen.goto(SCREEN_COORDS[0][0] + BORDER_OFFSET, SCREEN_COORDS[1][1] - BORDER_OFFSET)
+
+draw_border()
 
 game_is_on = False
 snake = Snake()
@@ -63,9 +73,9 @@ def self_collision_check() -> bool:
 
 def collision_check() -> bool:
     flag = True
-    if snake.pos()[0] < SCREEN_COORDS[0][0] or snake.pos()[0] > SCREEN_COORDS[0][1]:
+    if snake.pos()[0] < SCREEN_COORDS[0][0] + STEP_DIST or snake.pos()[0] > SCREEN_COORDS[0][1] - STEP_DIST:
         flag = False
-    elif snake.pos()[1] < SCREEN_COORDS[1][0] or snake.pos()[1] > SCREEN_COORDS[1][1]:
+    elif snake.pos()[1] < SCREEN_COORDS[1][0] + STEP_DIST or snake.pos()[1] > SCREEN_COORDS[1][1] - STEP_DIST:
         flag = False
     elif self_collision_check() is False:
         flag = False        

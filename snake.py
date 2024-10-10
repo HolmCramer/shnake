@@ -20,8 +20,8 @@ class Segment(Turtle):
     
     def set_rnd_pos(self, snake_positions) -> None:
         while True:
-            x = randint(SCREEN_COORDS[0][0]//20, SCREEN_COORDS[0][1]//20) * 20
-            y = randint(SCREEN_COORDS[1][0]//20, SCREEN_COORDS[1][1]//20) * 20
+            x = randint((SCREEN_COORDS[0][0]+STEP_DIST)//20, (SCREEN_COORDS[0][1]-STEP_DIST)//20) * 20
+            y = randint((SCREEN_COORDS[1][0]+STEP_DIST)//20, (SCREEN_COORDS[1][1]-STEP_DIST)//20) * 20
             coords = (x,y)
             if coords not in snake_positions:
                 break
