@@ -14,6 +14,7 @@ class Snake(Turtle):
     def __init__(self, shape: str = "square", undobuffersize: int = 1000, visible: bool = True) -> None:
         super().__init__(shape, undobuffersize, visible)
         self.up()
+        self.shapesize(0.8,0.8)
         self.color(SNAKE_COLOR)
         self.segments : Segment = []
         self.init_segments(2)
