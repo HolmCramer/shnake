@@ -1,7 +1,7 @@
 from turtle import Turtle
 from utils import SCREEN_COORDS
 
-SCOREBOARD_POS = (SCREEN_COORDS[0][0]+10,SCREEN_COORDS[1][0])
+SCOREBOARD_POS = (SCREEN_COORDS[0][0]+25,SCREEN_COORDS[1][0]-15)
 
 
 class Scoreboard(Turtle):
