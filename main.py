@@ -76,7 +76,7 @@ def collision_check() -> bool:
 
 def eat_food(food : Segment):
     flag = False
-    if snake.distance(food.pos()) < 5:
+    if food.pos() == snake.pos():
         flag = snake.add_segment(food)
         food = Segment(food_spawn=True, snake_positions=snake.get_snake_positions())
         scoreboard.increment_score()
