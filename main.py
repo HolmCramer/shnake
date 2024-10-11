@@ -93,16 +93,16 @@ def eat_food(food : Segment):
         scoreboard.increment_score()
     return flag, food
 
-def waiter() -> None:
-    sleep(0.2)
+def waiter(frame_time) -> None:
+    sleep(frame_time)
 
-def thread_builder() -> Thread:
-    thread = Thread(target=waiter, args=())
+def thread_builder(frame_time) -> Thread:
+    thread = Thread(target=waiter, args=(frame_time,))
     return thread
 
 def main() -> None:
     food = Segment(food_spawn=True, snake_positions=snake.get_snake_positions())
-    
+    frame_time = 0.2
     scoreboard.get_score_string()
     game_is_on = True
     eat_flag = False
@@ -116,7 +116,7 @@ def main() -> None:
         if game_is_on is not True:
             break
         screen.update()
-        thread = thread_builder()
+        thread = thread_builder(frame_time)
         thread.start()
         thread.join()
     print("You lost!")
