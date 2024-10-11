@@ -3,6 +3,8 @@ from snake import Snake, Segment, DIRECTIONS
 from scoreboard import Scoreboard, SCOREBOARD_POS
 import time
 from utils import SCREEN_RES, SCREEN_COORDS, BORDER_OFFSET, STEP_DIST
+from threading import Thread
+from time import sleep
 
 
 
@@ -91,8 +93,14 @@ def eat_food(food : Segment):
         scoreboard.increment_score()
     return flag, food
 
+def waiter() -> None:
+    sleep(0.2)
+
+def thread_builder() -> Thread:
+    thread = Thread(target=waiter, args=())
+    return thread
+
 def main() -> None:
-    #print(SCOREBOARD_POS)
     food = Segment(food_spawn=True, snake_positions=snake.get_snake_positions())
     
     scoreboard.get_score_string()
@@ -108,7 +116,9 @@ def main() -> None:
         if game_is_on is not True:
             break
         screen.update()
-        time.sleep(0.2)
+        thread = thread_builder()
+        thread.start()
+        thread.join()
     print("You lost!")
     screen.exitonclick()
 
