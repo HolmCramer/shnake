@@ -1,18 +1,12 @@
-from threading import Thread
-from time import sleep
-
-def waiter() -> None:
-    sleep(1)
-
-def thread_builder() -> Thread:
-    thread = Thread(target=waiter, args=())
-    return thread
+from math import log
 
 def main():
-    while True:
-        thread = thread_builder()
-        thread.start()
-        thread.join()
-        print("finished")
-
+    numinator = 120
+    denominator = 100
+    
+    for _ in range(20):
+        result = log(numinator/denominator, 25)
+        numinator += 10
+        print(result)
+        
 main()

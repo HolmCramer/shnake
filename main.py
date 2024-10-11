@@ -5,6 +5,7 @@ import time
 from utils import SCREEN_RES, SCREEN_COORDS, BORDER_OFFSET, STEP_DIST
 from threading import Thread
 from time import sleep
+from math import log
 
 
 
@@ -59,6 +60,14 @@ def left():
     snake.set_snake_direction(DIRECTIONS.LEFT)
     insert_into_input_buffer(DIRECTIONS.LEFT)
 
+def update_speed(snake : Snake, frame_time) -> float:
+    print(f"exp: {log(frame_time/0.3, 0.98)}, segs: {snake.get_number_of_segments()-2}")
+    
+    if log(frame_time/0.3, 0.98) < snake.get_number_of_segments() - 2:
+        frame_time *= 0.98
+    print(frame_time)
+    return frame_time
+
 def event_handler() -> None:
         screen.onkeypress(up, "Up")
         screen.onkeypress(right, "Right")
@@ -102,7 +111,7 @@ def thread_builder(frame_time) -> Thread:
 
 def main() -> None:
     food = Segment(food_spawn=True, snake_positions=snake.get_snake_positions())
-    frame_time = 0.2
+    frame_time = 0.3
     scoreboard.get_score_string()
     game_is_on = True
     eat_flag = False
@@ -116,6 +125,7 @@ def main() -> None:
         if game_is_on is not True:
             break
         screen.update()
+        frame_time = update_speed(snake, frame_time)
         thread = thread_builder(frame_time)
         thread.start()
         thread.join()

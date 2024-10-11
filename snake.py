@@ -46,6 +46,10 @@ class Snake(Turtle):
             self.segments.append(Segment(shape="square"))
         return
     
+    def get_number_of_segments(self) -> int:
+        count = len(self.segments)
+        return count
+
     def add_segment(self, segment : Segment) -> bool:
         segment.shape("square")
         self.segments.insert(0, segment)
