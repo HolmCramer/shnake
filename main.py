@@ -1,7 +1,6 @@
 from turtle import Screen, Turtle
 from snake import Snake, Segment, DIRECTIONS
 from scoreboard import Scoreboard, SCOREBOARD_POS
-import time
 from utils import SCREEN_RES, SCREEN_COORDS, BORDER_OFFSET, STEP_DIST
 from threading import Thread
 from time import sleep
@@ -61,11 +60,10 @@ def left():
     insert_into_input_buffer(DIRECTIONS.LEFT)
 
 def update_speed(snake : Snake, frame_time) -> float:
-    print(f"exp: {log(frame_time/0.3, 0.98)}, segs: {snake.get_number_of_segments()-2}")
-    
-    if log(frame_time/0.3, 0.98) < snake.get_number_of_segments() - 2:
-        frame_time *= 0.98
-    print(frame_time)
+    #print(f"exp: {int(log(frame_time/0.3, 0.99))}, segs: {snake.get_number_of_segments()-2}")
+    if int(log(frame_time/0.3, 0.99)) < snake.get_number_of_segments() - 2:
+        frame_time *= 0.99
+    #print(frame_time)
     return frame_time
 
 def event_handler() -> None:
@@ -134,3 +132,5 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
+screen.mainloop()
