@@ -1,5 +1,5 @@
-from turtle import Turtle
-from utils import SCREEN_COORDS
+from turtle import Turtle, Screen
+from utils import SCREEN_COORDS, SCREEN_RES
 import csv
 
 SCOREBOARD_POS = (SCREEN_COORDS[0][0]+25,SCREEN_COORDS[1][0]-15)
@@ -64,6 +64,26 @@ class Scoreboard(Turtle):
             csvwriter.writerow(fields)
             csvwriter.writerows(rows)
 
-    def display_scoreboard(self, screen) -> None:
+    def display_scoreboard(self, screen : Screen) -> None:
         screen.clear()
-        pass
+        screen.setup(width=SCREEN_RES[0], height=SCREEN_RES[1])
+        screen.screensize(canvwidth=SCREEN_RES[0],canvheight=SCREEN_RES[1])
+        screen.setworldcoordinates(SCREEN_COORDS[0][0], SCREEN_COORDS[1][0]-10, SCREEN_COORDS[0][1]+10, SCREEN_COORDS[1][1])
+        screen.mode("world")
+        screen.colormode(255)
+        screen.bgcolor(139,172,15)
+        screen.title("Scoreboard")
+        screen.tracer(0)
+        
+        self.teleport(0, 100)
+        score_string = f"Scoreboard"
+        self.write(score_string, align="center", font=("Arial", 20, "bold"))
+        
+        pos = 60
+        scoreboard_list = self.get_scoreboard_list()
+        
+        for score in scoreboard_list:
+            self.teleport(-55, pos)
+            pos -= 30
+            score_string = f"{score['Name']}\t{(4-len(str(score['Score'])))*"0"}{str(score['Score'])}"
+            self.write(score_string, align="left", font=("Arial", 20, "normal"))
