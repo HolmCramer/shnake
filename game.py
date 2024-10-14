@@ -113,6 +113,7 @@ def gameloop() -> None:
     scoreboard.get_score_string()
     game_is_on = True
     eat_flag = False
+    scoreboard.input_player_name()
     while game_is_on:
         screen.update()
         event_handler()
@@ -128,4 +129,7 @@ def gameloop() -> None:
         thread.start()
         thread.join()
     print("You lost!")
+    scoreboard.get_scoreboard_list()
+    scoreboard.insert_score_into_csv()
+    scoreboard.display_scoreboard(screen)
     screen.exitonclick()
