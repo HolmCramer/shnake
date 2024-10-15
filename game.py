@@ -41,19 +41,15 @@ class Game():
             self.input_buffer.pop()
 
     def up(self):
-        self.snake.set_snake_direction(DIRECTIONS.UP)
         self.insert_into_input_buffer(DIRECTIONS.UP)
 
     def right(self):
-        self.snake.set_snake_direction(DIRECTIONS.RIGHT)
         self.insert_into_input_buffer(DIRECTIONS.RIGHT)
 
     def down(self):
-        self.snake.set_snake_direction(DIRECTIONS.DOWN)
         self.insert_into_input_buffer(DIRECTIONS.DOWN)
 
     def left(self):
-        self.snake.set_snake_direction(DIRECTIONS.LEFT)
         self.insert_into_input_buffer(DIRECTIONS.LEFT)
 
     def update_speed(self, snake : Snake, frame_time : float) -> float:

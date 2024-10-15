@@ -61,33 +61,6 @@ class Snake(Turtle):
                 self.segments[i].teleport(self.xcor(), self.ycor())
             else:
                 self.segments[i].teleport(self.segments[i-1].xcor(), self.segments[i-1].ycor())
-    
-    def set_snake_direction(self, direction: DIRECTIONS) -> None:
-        match direction:
-            case DIRECTIONS.UP:
-                if self.heading() == SOUTH:
-                    return
-                else:
-                    self.setheading(NORTH)
-                    return
-            case DIRECTIONS.RIGHT:
-                if self.heading() == WEST:
-                    return
-                else:
-                    self.setheading(EAST)
-                    return
-            case DIRECTIONS.DOWN:
-                if self.heading() == NORTH:
-                    return
-                else:
-                    self.setheading(SOUTH)
-                    return
-            case DIRECTIONS.LEFT:
-                if self.heading() == EAST:
-                    return
-                else:
-                    self.setheading(WEST)
-                    return
 
     def get_direction(self, input_buffer : list, eaten : bool) -> DIRECTIONS:
         if eaten is True:
