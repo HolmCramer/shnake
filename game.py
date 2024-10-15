@@ -37,11 +37,8 @@ input_buffer = [DIRECTIONS.RIGHT]
 def insert_into_input_buffer(direction : DIRECTIONS) -> None:
     if direction is not input_buffer[0]:
         input_buffer.insert(0, direction)
-    if len(input_buffer) > 2:
-        while True:
-            input_buffer.pop()
-            if len(input_buffer) <= 2:
-                break
+    while len(input_buffer) > 2:
+        input_buffer.pop()
 
 def up():
     snake.set_snake_direction(DIRECTIONS.UP)
