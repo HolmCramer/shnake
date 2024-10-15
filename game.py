@@ -56,11 +56,11 @@ def left():
     snake.set_snake_direction(DIRECTIONS.LEFT)
     insert_into_input_buffer(DIRECTIONS.LEFT)
 
-def update_speed(snake : Snake, frame_time) -> float:
+def update_speed(snake : Snake, frame_time : float) -> float:
     #print(f"exp: {int(log(frame_time/0.3, 0.99))}, segs: {snake.get_number_of_segments()-2}")
     if int(log(frame_time/0.3, 0.99)) < snake.get_number_of_segments() - 2:
         frame_time *= 0.99
-    #print(frame_time)
+    #print(frame_time) 
     return frame_time
 
 def event_handler() -> None:
