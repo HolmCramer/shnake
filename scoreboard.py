@@ -77,9 +77,9 @@ class Scoreboard(Turtle):
         screen.tracer(0)
         
         self.teleport(0, 100)
-        score_string = f"__________"
+        score_string = "__________"
         self.write(score_string, align="center", font=("OCR A Extended", 20, "bold"))
-        score_string = f"Scoreboard"
+        score_string = "Scoreboard"
         self.write(score_string, align="center", font=("OCR A Extended", 20, "bold"))
         
         pos = 40
