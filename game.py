@@ -15,7 +15,7 @@ screen.setworldcoordinates(SCREEN_COORDS[0][0], SCREEN_COORDS[1][0]-10, SCREEN_C
 screen.mode("world")
 screen.colormode(255)
 screen.bgcolor(139,172,15)
-screen.title("Snake")
+screen.title("Shnake")
 screen.tracer(0)
 
 def draw_border() -> None:

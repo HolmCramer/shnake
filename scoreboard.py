@@ -2,7 +2,7 @@ from turtle import Turtle, Screen
 from utils import SCREEN_COORDS, SCREEN_RES
 import csv
 
-SCOREBOARD_POS = (SCREEN_COORDS[0][0]+25,SCREEN_COORDS[1][0]-15)
+SCOREBOARD_POS = (SCREEN_COORDS[0][0]+25,SCREEN_COORDS[1][0]-13.5)
 
 
 class Scoreboard(Turtle):
@@ -19,7 +19,7 @@ class Scoreboard(Turtle):
     def draw_scoreboard(self) -> None:
         self.teleport(SCOREBOARD_POS[0],SCOREBOARD_POS[1])
         score_string = self.get_score_string()
-        self.write(score_string, font=("Arial", 16, "normal"))
+        self.write(score_string, font=("OCR A Extended", 16, "normal"))
 
     def increment_score(self) -> None:
         self.score += 10
@@ -27,7 +27,8 @@ class Scoreboard(Turtle):
         self.draw_scoreboard()
 
     def input_player_name(self) -> None:
-        self.player_name = self.screen.textinput("Enter Nickname", "Enter your Nickname: ")
+        self.player_name = self.screen.textinput("Enter Nickname", "Enter your Nickname(max 11 characters): ")
+        self.player_name = self.player_name[:11]
         print(self.player_name)
 
     def get_scoreboard_list(self) -> list[dict]:
@@ -76,14 +77,21 @@ class Scoreboard(Turtle):
         screen.tracer(0)
         
         self.teleport(0, 100)
+        score_string = f"__________"
+        self.write(score_string, align="center", font=("OCR A Extended", 20, "bold"))
         score_string = f"Scoreboard"
-        self.write(score_string, align="center", font=("Arial", 20, "bold"))
+        self.write(score_string, align="center", font=("OCR A Extended", 20, "bold"))
         
-        pos = 60
+        pos = 40
+        place = 1
         scoreboard_list = self.get_scoreboard_list()
         
         for score in scoreboard_list:
-            self.teleport(-55, pos)
+            self.teleport(-170, pos)
+            score_string = f"{place}. {score['Name']}"
+            self.write(score_string, align="left", font=("OCR A Extended", 20, "normal"))
+            self.teleport(170, pos)
+            score_string = f"{(4-len(str(score['Score'])))*"0"}{str(score['Score'])}"
+            self.write(score_string, align="right", font=("OCR A Extended", 20, "normal"))
             pos -= 30
-            score_string = f"{score['Name']}\t{(4-len(str(score['Score'])))*"0"}{str(score['Score'])}"
-            self.write(score_string, align="left", font=("Arial", 20, "normal"))
+            place += 1
