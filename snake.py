@@ -36,6 +36,7 @@ class Snake(Turtle):
         self.segments : Segment = []
         self.init_segments(2)
         self.init_pos()
+        self.last_direction = DIRECTIONS.RIGHT
     
     def init_pos(self):
         self.segments[0].teleport(-20,0)
@@ -68,29 +69,32 @@ class Snake(Turtle):
         else:
             segment = self.segments[0]
         
-        match input_buffer[0]:
-            case DIRECTIONS.UP:
-                if segment.ycor() == self.ycor() + STEP_DIST:
-                    return input_buffer[1]
-                else:
-                    return input_buffer[0]
-            case DIRECTIONS.RIGHT:
-                if segment.xcor() == self.xcor() + STEP_DIST:
-                    return input_buffer[1]
-                else:
-                    return input_buffer[0]
-            case DIRECTIONS.DOWN:
-                if segment.ycor() == self.ycor() - STEP_DIST:
-                    return input_buffer[1]
-                else:
-                    return input_buffer[0]
-            case DIRECTIONS.LEFT:
-                if segment.xcor() == self.xcor() - STEP_DIST:
-                    return input_buffer[1]
-                else:
-                    return input_buffer[0]
-            case _:
-                print("Error calculating Direction!")
+        if len(input_buffer) > 0:
+            match input_buffer[0]:
+                case DIRECTIONS.UP:
+                    if segment.ycor() == self.ycor() + STEP_DIST:
+                        return self.last_direction
+                    else:
+                        return input_buffer[0]
+                case DIRECTIONS.RIGHT:
+                    if segment.xcor() == self.xcor() + STEP_DIST:
+                        return self.last_direction
+                    else:
+                        return input_buffer[0]
+                case DIRECTIONS.DOWN:
+                    if segment.ycor() == self.ycor() - STEP_DIST:
+                        return self.last_direction
+                    else:
+                        return input_buffer[0]
+                case DIRECTIONS.LEFT:
+                    if segment.xcor() == self.xcor() - STEP_DIST:
+                        return self.last_direction
+                    else:
+                        return input_buffer[0]
+                case _:
+                    print("Error calculating Direction!")
+        else:
+            return self.last_direction
 
     def teleport_in_direction(self, direction : DIRECTIONS) -> None:
         match direction:
@@ -112,6 +116,7 @@ class Snake(Turtle):
             eaten = False
         self.teleport_in_direction(direction)
         input_flag = True
+        self.last_direction = direction
         return input_flag, eaten
     
     def get_snake_positions(self) -> tuple:

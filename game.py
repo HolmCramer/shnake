@@ -36,11 +36,14 @@ class Game():
 
 
     def insert_into_input_buffer(self, direction : DIRECTIONS) -> None:
-        if direction is not self.input_buffer[0] and self.input_flag is True:
-            self.input_buffer.insert(0, direction)
-            self.input_flag = False
+        if direction not in self.input_buffer:
+            self.input_buffer.append(direction)
         while len(self.input_buffer) > 4:
             self.input_buffer.pop()
+
+    def delete_first_input_in_buffer(self) -> None:
+        if len(self.input_buffer) >= 1:
+            self.input_buffer.pop(0)
 
     def up(self):
         self.insert_into_input_buffer(DIRECTIONS.UP)
@@ -111,6 +114,7 @@ class Game():
             self.event_handler()
             self.screen.update()
             self.input_flag, eat_flag = self.snake.move_snake(eat_flag, self.input_buffer)
+            self.delete_first_input_in_buffer()
             eat_flag, food = self.eat_food(food)
             game_is_on = self.collision_check()
             if game_is_on is not True:
