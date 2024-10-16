@@ -23,6 +23,7 @@ class Game():
         self.snake = Snake()
         self.scoreboard = Scoreboard()
         self.input_buffer = [DIRECTIONS.RIGHT]
+        self.input_flag = True
         self.frame_time = 0.3
 
     def draw_border(self) -> None:
@@ -35,9 +36,10 @@ class Game():
 
 
     def insert_into_input_buffer(self, direction : DIRECTIONS) -> None:
-        if direction is not self.input_buffer[0]:
+        if direction is not self.input_buffer[0] and self.input_flag is True:
             self.input_buffer.insert(0, direction)
-        while len(self.input_buffer) > 2:
+            self.input_flag = False
+        while len(self.input_buffer) > 4:
             self.input_buffer.pop()
 
     def up(self):
@@ -108,7 +110,7 @@ class Game():
             self.screen.update()
             self.event_handler()
             self.screen.update()
-            eat_flag = self.snake.move_snake(eat_flag, self.input_buffer)
+            self.input_flag, eat_flag = self.snake.move_snake(eat_flag, self.input_buffer)
             eat_flag, food = self.eat_food(food)
             game_is_on = self.collision_check()
             if game_is_on is not True:

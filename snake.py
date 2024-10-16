@@ -111,7 +111,8 @@ class Snake(Turtle):
         else:
             eaten = False
         self.teleport_in_direction(direction)
-        return eaten
+        input_flag = True
+        return input_flag, eaten
     
     def get_snake_positions(self) -> tuple:
         snake_positions = [self.pos()]
