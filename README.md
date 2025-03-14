@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a small project I made during my reschooling. With the self imposed rule to to only use built-ins and no other dependencies.
+This is a small project I made during my career change training. With the self imposed rule to only use built-ins and no other dependencies.
 
 It's a basic Snake clone with with a local scoreboard feature.
 
